@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
-import AdminNav from '@/components/common/AdminNav';
 import {AiOutlineDashboard, AiOutlineContainer, AiOutlineTeam, AiOutlineMail, AiOutlineContacts} from 'react-icons/ai'
-interface Props { }
+
+interface Props {}
 
 const navItems = [
     {href: "/admin", icon: AiOutlineDashboard, label: "Dashboard"},
@@ -11,12 +11,8 @@ const navItems = [
     {href: "/admin/contacts", icon: AiOutlineContacts, label: "Contacts"},
 ]
 
-
-const Admin: NextPage<Props> = () => {
-    return (
-    <div>
-        <AdminNav navItems={navItems}/>
-    </div>)
+const Posts: NextPage<Props> = () => {
+  return <div>posts</div>;
 };
 
-export default Admin;
+export default Posts;
