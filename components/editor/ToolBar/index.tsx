@@ -1,32 +1,58 @@
 import { FC } from 'react';
 import { Editor } from '@tiptap/react';
 import DropdownOptions from '@/components/common/DropdownOptions';
+import { AiFillCaretDown } from 'react-icons/ai'
+import { getFocusedEditor } from '../EditorUtils';
 
 interface Props {
     editor: Editor | null
 }
 
-const ToolBar: FC<Props> = ({editor}): JSX.Element | null => {
-  if(!editor) return null;
+const ToolBar: FC<Props> = ({ editor }): JSX.Element | null => {
+    if (!editor) return null;
+
+    const options = [
+        {
+            label: "Paragraph", 
+            onClick: () => getFocusedEditor(editor).setParagraph().run()
+        },
+        {
+            label: "Heading 1", 
+            onClick: () => getFocusedEditor(editor).toggleHeading({level: 1}).run()
+        },
+        {
+            label: "Heading 2", 
+            onClick: () => getFocusedEditor(editor).toggleHeading({level: 2}).run()
+        },
+        {
+            label: "Heading 3", 
+            onClick: () => getFocusedEditor(editor).toggleHeading({level: 3}).run()
+        }
+    ]
+
+    const getLabel = (): string =>{
+        if(editor.isActive('heading', {level: 1})) return 'heading 1'
+        if(editor.isActive('heading', {level: 2})) return 'heading 2'
+        if(editor.isActive('heading', {level: 3})) return 'heading 3'
+    
+        //default
+        return "paragraph"
+    }
+
+    const Head = () => {
+        return (
+            <div className="flex items-center space-x-2 text-primary-dark dark:text-primary">
+                <p>{getLabel()}</p>
+                <AiFillCaretDown />
+            </div>
+        )
+    }
     return (
-    <div>
-        <DropdownOptions options={[
-            {label: "Paragraph", onClick: () =>{
-                console.log("Paragraph clicked")
-            }},
-            {label: "Heading 1", onClick: () =>{
-                console.log("h1 clicked")
-            }},
-            {label: "Heading 2", onClick: () =>{
-                console.log("h2 clicked")
-            }},
-            {label: "Heading 3", onClick: () =>{
-                console.log("h3 clicked")
-            }}            
-            ]}
-            head={<p>Paragraph</p>}   
+        <div>
+            <DropdownOptions options={options}
+                head={<Head />}
             />
-    </div>
+        </div>
     )
 };
 
