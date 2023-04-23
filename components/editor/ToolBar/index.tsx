@@ -20,6 +20,7 @@ import {
 } from 'react-icons/bs'
 import InsertLink from '../Link/InsertLink';
 import { linkOption } from '../Link/LinkForm';
+import EmbedYoutube from './EmbedYoutube';
 
 interface Props {
     editor: Editor | null
@@ -61,6 +62,10 @@ const ToolBar: FC<Props> = ({ editor }): JSX.Element | null => {
         const {commands} = editor
         if(openInNewTab) commands.setLink({href: url, target: "_blank"})
         else commands.setLink({href: url})
+    }
+
+    const handleEmbedYoutube = (url:string) => {
+        editor.chain().focus().setYoutubeVideo({src:url}).run()
     }
 
 
@@ -114,9 +119,10 @@ const ToolBar: FC<Props> = ({ editor }): JSX.Element | null => {
 
             <div className="h-4 w-[1px] bg-secondary-dark dark:bg-secondary-light mx-8" />
             <div className="flex items-center space-x-3">
-                <Button>
-                    <BsYoutube />
-                </Button>
+
+            <EmbedYoutube onSubmit={handleEmbedYoutube}/>
+
+
                 <Button>
                     <BsImageFill />
                 </Button>
