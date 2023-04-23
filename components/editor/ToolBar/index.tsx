@@ -18,6 +18,8 @@ import {
     BsLink45Deg,
     BsYoutube
 } from 'react-icons/bs'
+import InsertLink from '../Link/InsertLink';
+import { linkOption } from '../Link/LinkForm';
 
 interface Props {
     editor: Editor | null
@@ -54,6 +56,14 @@ const ToolBar: FC<Props> = ({ editor }): JSX.Element | null => {
         return "paragraph"
     }
 
+    const handleLinkSubmit = ({url, openInNewTab}: linkOption) => {
+        //destructuring
+        const {commands} = editor
+        if(openInNewTab) commands.setLink({href: url, target: "_blank"})
+        else commands.setLink({href: url})
+    }
+
+
     const Head = () => {
         return (
             <div className="flex items-center space-x-2 text-primary-dark dark:text-primary">
@@ -63,41 +73,41 @@ const ToolBar: FC<Props> = ({ editor }): JSX.Element | null => {
         )
     }
     return (
-        <div className=" flex items-center p-3 dark:bg-primary-dark bg-primary transition">
+        <div className=" flex items-center dark:bg-primary-dark bg-primary transition">
             <DropdownOptions options={options} head={<Head />} />
             <div className="h-4 w-[1px] bg-secondary-dark dark:bg-secondary-light mx-8" />
             <div className="flex items-center space-x-3">
-                <Button active={editor.isActive("bold")} onClick={()=> getFocusedEditor(editor).toggleBold().run()}>
+                <Button active={editor.isActive("bold")} onClick={() => getFocusedEditor(editor).toggleBold().run()}>
                     <BsTypeBold />
                 </Button>
-                <Button active={editor.isActive("italic")} onClick={()=> getFocusedEditor(editor).toggleItalic().run()}>
+                <Button active={editor.isActive("italic")} onClick={() => getFocusedEditor(editor).toggleItalic().run()}>
                     <BsTypeItalic />
                 </Button>
-                <Button active={editor.isActive("underline")} onClick={()=> getFocusedEditor(editor).toggleUnderline().run()}>
+                <Button active={editor.isActive("underline")} onClick={() => getFocusedEditor(editor).toggleUnderline().run()}>
                     <BsTypeUnderline />
                 </Button>
-                <Button active={editor.isActive("strike")} onClick={()=> getFocusedEditor(editor).toggleStrike().run()}>
+                <Button active={editor.isActive("strike")} onClick={() => getFocusedEditor(editor).toggleStrike().run()}>
                     <BsTypeStrikethrough />
                 </Button>
             </div>
             <div className="h-4 w-[1px] bg-secondary-dark dark:bg-secondary-light mx-8" />
             <div className="flex items-center space-x-3">
-                <Button active={editor.isActive("blockquote")} onClick={()=> getFocusedEditor(editor).toggleBlockquote().run()}>
+                <Button active={editor.isActive("blockquote")} onClick={() => getFocusedEditor(editor).toggleBlockquote().run()}>
                     <RiDoubleQuotesL />
                 </Button>
-                <Button active={editor.isActive("code")} onClick={()=> getFocusedEditor(editor).toggleCode().run()}>
+                <Button active={editor.isActive("code")} onClick={() => getFocusedEditor(editor).toggleCode().run()}>
                     <BsCode />
                 </Button>
-                <Button active={editor.isActive("codeBlock")} onClick={()=> getFocusedEditor(editor).toggleCodeBlock().run()}>
+                <Button active={editor.isActive("codeBlock")} onClick={() => getFocusedEditor(editor).toggleCodeBlock().run()}>
                     <BsBraces />
                 </Button>
-                <Button>
-                    <BsLink45Deg />
-                </Button>
-                <Button active={editor.isActive("orderedList")} onClick={()=> getFocusedEditor(editor).toggleOrderedList().run()}>
+                
+                <InsertLink onSubmit={handleLinkSubmit} />
+
+                <Button active={editor.isActive("orderedList")} onClick={() => getFocusedEditor(editor).toggleOrderedList().run()}>
                     <BsListOl />
                 </Button>
-                <Button active={editor.isActive("bulletList")} onClick={()=> getFocusedEditor(editor).toggleBulletList().run()}>
+                <Button active={editor.isActive("bulletList")} onClick={() => getFocusedEditor(editor).toggleBulletList().run()}>
                     <BsListUl />
                 </Button>
             </div>
