@@ -10,6 +10,7 @@ import EditLink from './Link/EditLink';
 import GalleryModal, { ImageSelectionResult } from './GalleryModal';
 import TipTapImage from "@tiptap/extension-image"
 import axios from 'axios';
+import SeoForm from './SeoForm';
 
 interface Props { }
 
@@ -99,15 +100,19 @@ const Editor: FC<Props> = (props): JSX.Element => {
     return (
         <>
             <div className="p-3 dark:bg-primary-dark bg-primary transition">
-                <input 
-                type="text" 
-                className="py-2 outline-none bg-transparent w-full border-0 border-b-[1px] border-secondary-dark dark:border-secondary-light text-3xl font-semibold italic text-primary-dark dark:text-primary-light mb-3" 
-                placeholder="Title"/>
+                <input
+                    type="text"
+                    className="py-2 outline-none bg-transparent w-full border-0 border-b-[1px] border-secondary-dark dark:border-secondary-light text-3xl font-semibold italic text-primary-dark dark:text-primary-light mb-3"
+                    placeholder="Title" />
 
                 <ToolBar editor={editor} onOpenImageClick={() => setShowGallery(true)} />
                 <div className="h-[1px] w-full bg-secondary-dark dark:bg-secondary-light my-3" />
                 {editor ? <EditLink editor={editor} /> : null}
-                <EditorContent editor={editor} />
+                <EditorContent editor={editor} className="min-h-[300px]" />
+                <div className="h-[1px] w-full bg-secondary-dark dark:bg-secondary-light my-3" />
+                <SeoForm onChange={(result)=>{
+                    console.log(result)
+                }}/>
             </div>
             <GalleryModal
                 visible={showGallery}
