@@ -21,14 +21,25 @@ interface FinalPost extends SeoResult{
 }
 
 interface Props { 
+    initialValue?: FinalPost;
+    btnTitle?: string;
+    busy?: boolean;
     onSubmit(post: FinalPost):void
 }
 
-const Editor: FC<Props> = ({onSubmit}): JSX.Element => {
+const Editor: FC<Props> = ({
+    initialValue, 
+    //default value
+    btnTitle = "Submit", 
+    //default value
+    busy = false, 
+    onSubmit
+}): JSX.Element => {
     const [selectionRange, setSelectionRange] = useState<Range>()
     const [showGallery, setShowGallery] = useState(false)
     const [uploading, setUploading] = useState(false)
     const [images, setImages] = useState<{ src: string }[]>([])
+    const [seoInitialValue, setSeoInitialValue] = useState<SeoResult>()
     const [post, setPost] = useState<FinalPost>({
         title: "",
         content: "",
@@ -132,15 +143,24 @@ const Editor: FC<Props> = ({onSubmit}): JSX.Element => {
         fetchImages()
     }, [])
 
+    useEffect(() => {
+        if(initialValue){
+            setPost({...initialValue})
+            editor?.commands.setContent(initialValue.content)
+            const {meta, slug, tags} = initialValue;
+            setSeoInitialValue({meta, slug, tags})
+        }
+    }, [initialValue, editor])
+
     return (
         <>
             <div className="p-3 dark:bg-primary-dark bg-primary transition">
                 <div className="sticky top-0 z-10 dark:bg-primary-dark bg-primary">
                     {/* THUMBNAIL SELECTOR AND SUBMIT BUTTON */}
                     <div className="flex items-center justify-between mb-3">
-                        <ThumbnailSelector onChange={updateThumbnail} />
+                        <ThumbnailSelector initialValue={post.thumbnail as string} onChange={updateThumbnail} />
                         <div className="inline-block">
-                            <ActionButton title="Submit" onClick={handleSubmit} />
+                            <ActionButton busy={busy} title={btnTitle} onClick={handleSubmit} />
                         </div>
                     </div>
 
@@ -151,6 +171,7 @@ const Editor: FC<Props> = ({onSubmit}): JSX.Element => {
                         className="py-2 outline-none bg-transparent w-full border-0 border-b-[1px] border-secondary-dark dark:border-secondary-light text-3xl font-semibold italic text-primary-dark dark:text-primary-light mb-3"
                         placeholder="Title" 
                         onChange={updateTitle}
+                        value={post.title}
                         />
 
                     <ToolBar editor={editor} onOpenImageClick={() => setShowGallery(true)} />
@@ -165,6 +186,7 @@ const Editor: FC<Props> = ({onSubmit}): JSX.Element => {
                 <SeoForm 
                 onChange={updateSeoValue}
                 title={post.title}
+                initialValue={seoInitialValue}
                 />
             </div>
             <GalleryModal

@@ -41,6 +41,11 @@ const SeoForm: FC<Props> = ({
     onChange(newValues)
   }, [title])
 
+  useEffect(() => {
+    if(initialValue){
+      setValues({...initialValue, slug: slugify(initialValue.slug)})
+    }
+  }, [initialValue])
 
   const { meta, slug, tags } = values
 
