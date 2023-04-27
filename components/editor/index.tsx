@@ -14,7 +14,7 @@ import SeoForm, { SeoResult } from './SeoForm';
 import ActionButton from '../common/ActionButton';
 import ThumbnailSelector from './ThumbnailSelector';
 
-interface FinalPost extends SeoResult{
+export interface FinalPost extends SeoResult{
     title: string;
     content: string;
     thumbnail?: File | string;
