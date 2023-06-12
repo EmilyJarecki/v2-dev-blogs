@@ -40,11 +40,9 @@ const EditLink: FC<Props> = ({ editor }): JSX.Element => {
   }
 
   const getInitialState = useCallback(() => {
-    const { href, target } = editor.getAttributes("link")
-    if (href) {
-      return { url: href, openInNewTab: target ? true : false }
-    }
-  }, [editor])
+    const { href, target } = editor.getAttributes("link");
+    return { url: href, openInNewTab: target ? true : false };
+  }, [editor]);
 
   return (
     <BubbleMenu

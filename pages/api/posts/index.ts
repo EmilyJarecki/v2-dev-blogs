@@ -47,10 +47,8 @@ const createNewPost: NextApiHandler = async (req, res) => {
         tags
     })
 
-    await newPost.save()
-
     //uploading thumbnail if there is any
-    const thumbnail = files.thumbnail as formidable.File
+    const thumbnail = files.thumbnail as formidable.File;
     if (thumbnail) {
         const { secure_url: url, public_id } = await cloudinary.uploader.
             upload(
