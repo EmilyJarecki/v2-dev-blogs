@@ -12,7 +12,7 @@ const posts = [
     tags: ["post"],
     thumbnail:
     "https://compote.slate.com/images/5294e6d0-53ed-4a4a-a350-7eaeab72ac93.jpeg?crop=1560%2C1040%2Cx0%2Cy0",
-    createdAt: "Sunday June 11 2023"
+    createdAt: "Sat Jun 09 2007 17:46:21"
   },
   {
     title: "This is my new second post for now.",
@@ -20,8 +20,8 @@ const posts = [
     meta: "This is my second post, and typesetting industry. Lorem Ipsum has been the industry's standard",
     tags: ["post"],
     thumbnail:
-    "https://compote.slate.com/images/5294e6d0-53ed-4a4a-a350-7eaeab72ac93.jpeg?crop=1560%2C1040%2Cx0%2Cy0",
-    createdAt: "Sunday June 11 2023"
+    "https://cdn.britannica.com/59/94459-050-DBA42467/Skyline-Chicago.jpg",
+    createdAt: "Sat Jun 09 2007 17:46:21"
   }
 ]
 
@@ -36,7 +36,6 @@ const [postsToRender, setPostsToRender] = useState(posts)
         {postsToRender.map((post, index) => 
         (<PostCard key = {index} post={post}/>))}
       </div>
-      hello
     </div>
   </AdminLayout>
     )
