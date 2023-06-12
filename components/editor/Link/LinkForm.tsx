@@ -23,10 +23,9 @@ const LinkForm: FC<Props> = ({ visible, initialState, onSubmit }): JSX.Element |
     const [link, setLink] = useState<linkOption>(defaultLink)
 
     const handleSubmit = () => {
-        if (!link.url.trim()) return;
-        onSubmit({ ...link, url: validateUrl(link.url) })
+        onSubmit({ ...link, url: validateUrl(link.url) });
         resetForm();
-    }
+      };
 
     const resetForm = () => {
         setLink({ ...defaultLink })
@@ -43,7 +42,8 @@ const LinkForm: FC<Props> = ({ visible, initialState, onSubmit }): JSX.Element |
             <input
                 autoFocus
                 type="text"
-                className="bg-transparent rounded border-2 border-secondary-dark focus:border-primary-dark dark:focus:border-primary transition p-2 text-primary-dark dark:text-primary" placeholder='https://example.com'
+                className="bg-transparent rounded border-2 border-secondary-dark focus:border-primary-dark dark:focus:border-primary transition p-2 text-primary-dark dark:text-primary" 
+                placeholder='https://example.com'
                 value={link.url}
                 onChange={({ target }) => setLink({ ...link, url: target.value })}
             />

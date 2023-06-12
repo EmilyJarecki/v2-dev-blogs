@@ -9,13 +9,27 @@ interface Props {
     title?: string;
 
 }
+
+
+
+
+
+
+
 const navItems = [
     { href: "/admin", icon: AiOutlineDashboard, label: "Dashboard" },
     { href: "/admin/posts", icon: AiOutlineContainer, label: "Posts" },
     { href: "/admin/users", icon: AiOutlineTeam, label: "Users" },
     { href: "/admin/comments", icon: AiOutlineMail, label: "Comments" },
-    { href: "/admin/contacts", icon: AiOutlineContacts, label: "Contacts" },
+    { href: "/admin/contact", icon: AiOutlineContacts, label: "Contact" },
 ]
+
+
+
+
+
+
+
 const AdminLayout: FC<Props> = ({ children, title }): JSX.Element => {
     return (
         <>

@@ -17,8 +17,9 @@ const EmbedYoutube: FC<Props> = ({ onSubmit }): JSX.Element => {
 
         if (!url.trim()) return hideForm()
 
-        onSubmit(url)
-        hideForm()
+        onSubmit(url);
+        setUrl("");
+        hideForm();
     }
 
     const hideForm = () => setVisible(false)
@@ -52,7 +53,7 @@ const EmbedYoutube: FC<Props> = ({ onSubmit }): JSX.Element => {
                         </button>
                     </div>
                 </div>
-                )}
+            )}
         </div>
     )
 };

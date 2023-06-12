@@ -15,6 +15,8 @@ import ActionButton from '../common/ActionButton';
 import ThumbnailSelector from './ThumbnailSelector';
 
 export interface FinalPost extends SeoResult{
+    //optional id because when we create a post, it's not going to have an id yet
+    id?: string;
     title: string;
     content: string;
     thumbnail?: File | string;
@@ -158,9 +160,15 @@ const Editor: FC<Props> = ({
                 <div className="sticky top-0 z-10 dark:bg-primary-dark bg-primary">
                     {/* THUMBNAIL SELECTOR AND SUBMIT BUTTON */}
                     <div className="flex items-center justify-between mb-3">
-                        <ThumbnailSelector initialValue={post.thumbnail as string} onChange={updateThumbnail} />
+                        <ThumbnailSelector 
+                        initialValue={post.thumbnail as string} 
+                        onChange={updateThumbnail} />
                         <div className="inline-block">
-                            <ActionButton busy={busy} title={btnTitle} onClick={handleSubmit} />
+                            <ActionButton 
+                            busy={busy} 
+                            title={btnTitle} 
+                            onClick={handleSubmit} 
+                            disabled={busy}/>
                         </div>
                     </div>
 
@@ -174,7 +182,9 @@ const Editor: FC<Props> = ({
                         value={post.title}
                         />
 
-                    <ToolBar editor={editor} onOpenImageClick={() => setShowGallery(true)} />
+                    <ToolBar 
+                    editor={editor} 
+                    onOpenImageClick={() => setShowGallery(true)} />
                     <div className="h-[1px] w-full bg-secondary-dark dark:bg-secondary-light my-3" />
                 </div>
 

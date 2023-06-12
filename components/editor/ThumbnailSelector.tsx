@@ -8,10 +8,6 @@ interface Props {
 
 const commonClass = " border border-dashed border-secondary-dark flex items-center justify-center rounded cursor-pointer aspect-video"
 
-
-
-
-
 const ThumbnailSelector: FC<Props> = ({initialValue, onChange}): JSX.Element => {
     const [selectedThumbnail, setSelectedThumbnail] = useState('');
 
@@ -26,7 +22,7 @@ const ThumbnailSelector: FC<Props> = ({initialValue, onChange}): JSX.Element => 
     }
 useEffect(()=>{
     if(typeof initialValue==="string") setSelectedThumbnail(initialValue)
-},[])
+},[initialValue])
 
     return (
         <div className="w-32">
